@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UE-MuseumFilter</string>
+    <string name="btn_cancel">Cancelar</string>
 </resources>

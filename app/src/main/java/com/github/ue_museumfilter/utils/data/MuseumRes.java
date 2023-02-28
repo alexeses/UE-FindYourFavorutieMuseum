@@ -30,4 +30,11 @@ public class MuseumRes implements Serializable {
         this.museum = museum;
     }
 
+    @Override
+    public String toString() {
+        return "MuseumRes{" +
+                "context=" + context +
+                ", museum=" + museum +
+                '}';
+    }
 }

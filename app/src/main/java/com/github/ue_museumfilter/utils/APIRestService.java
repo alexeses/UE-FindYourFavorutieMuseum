@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface APIRestService {
-    public static final String BASE_URL = "https://datos.madrid.es/egob/catalogo/201132-0-museos.json";
+    public static final String BASE_URL = "https://datos.madrid.es/egob/catalogo/";
 
     @GET("201132-0-museos.json")
     Call<MuseumRes> getMuseums(

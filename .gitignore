@@ -47,6 +47,3 @@ local.properties
 **/buildgenerated/
 **/externalNativeBuild/
 **/local.properties
-
-# Include only your Java source code
-app/src/main/java/

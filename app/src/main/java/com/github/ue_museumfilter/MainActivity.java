@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -70,4 +72,26 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
         this.distrito = distrito;
         System.out.println("Filter text: " + distrito);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_list:
+                Toast.makeText(this, "Mostrando lista", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_map:
+                Toast.makeText(this, "Mostrando mapa", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 }

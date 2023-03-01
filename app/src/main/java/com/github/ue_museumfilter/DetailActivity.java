@@ -1,12 +1,10 @@
 package com.github.ue_museumfilter;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.github.ue_museumfilter.utils.data.District;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -32,8 +30,8 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             String name = intent.getStringExtra("museum_title");
-            String district = intent.getStringExtra("museum_district"); // TODO: Error
-            String area = intent.getStringExtra("museum_area"); // TODO: Error
+            String district = intent.getStringExtra("museum_district");
+            String area = intent.getStringExtra("museum_area");
             String address = intent.getStringExtra("museum_address");
             String description = intent.getStringExtra("museum_description");
             String schedule = intent.getStringExtra("museum_schedule");

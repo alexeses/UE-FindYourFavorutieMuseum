@@ -37,9 +37,15 @@ public class MuseumAdapter extends RecyclerView.Adapter<MuseumAdapter.MuseumView
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), DetailActivity.class);
 
+                String districtId = museum.getAddress().getDistrict().getId();
+                String[] partsDis = districtId.split("/");
+
+                String areaId= museum.getAddress().getArea().getId();
+                String[] partsAre = areaId.split("/");
+
                 intent.putExtra("museum_title", museum.getTitle());
-                intent.putExtra("museum_district", museum.getAddress().getDistrict());
-                intent.putExtra("museum_area", museum.getAddress().getArea());
+                intent.putExtra("museum_district", partsDis[partsDis.length - 1]);
+                intent.putExtra("museum_area", partsAre[partsAre.length - 1]);
                 intent.putExtra("museum_address", museum.getAddress().getStreetAddress());
                 intent.putExtra("museum_description", museum.getOrganization().getOrganizationDesc());
                 intent.putExtra("museum_schedule", museum.getOrganization().getSchedule());

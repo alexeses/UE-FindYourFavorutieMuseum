@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 public class Address implements Serializable {
 
-    // Hola
     @SerializedName("district")
     @Expose
     private District district;

@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
                     }
                 }
 
-
                 @Override
                 public void onFailure(Call<MuseumRes> call, Throwable t) {
                     Toast.makeText(MainActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();

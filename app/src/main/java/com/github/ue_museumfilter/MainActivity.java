@@ -1,6 +1,8 @@
 package com.github.ue_museumfilter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,7 +10,10 @@ import android.widget.Toast;
 
 import com.github.ue_museumfilter.utils.APIRestService;
 import com.github.ue_museumfilter.utils.RetrofitClient;
+import com.github.ue_museumfilter.utils.data.Museum;
 import com.github.ue_museumfilter.utils.data.MuseumRes;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -43,12 +48,14 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
                 public void onResponse(Call<MuseumRes> call, Response<MuseumRes> response) {
                     if (response.isSuccessful()) {
                         MuseumRes museumRes = response.body();
-                        for (int i = 0; i < museumRes.getMuseums().size(); i++) {
-                            System.out.println(museumRes.getMuseums().get(i).getTitle());
-                        }
+                        List<Museum> museums = museumRes.getMuseums();
+                        MuseumAdapter adapter = new MuseumAdapter(museums);
+                        RecyclerView recyclerView = findViewById(R.id.rv_museos);
+                        recyclerView.setAdapter(adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                     }
-
                 }
+
 
                 @Override
                 public void onFailure(Call<MuseumRes> call, Throwable t) {

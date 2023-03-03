@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UEMuseumFilter"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDF_Stqz-hbopb_zucHYxQyayFkz4QALUI" />
+
         <activity
             android:name=".DetailActivity"
             android:exported="false" />

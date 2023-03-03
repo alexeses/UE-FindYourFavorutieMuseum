@@ -1,20 +1,22 @@
 package com.github.ue_museumfilter;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.github.ue_museumfilter.dialogs.DialogFilter;
+import com.github.ue_museumfilter.fragments.MuseumListFragment;
 import com.github.ue_museumfilter.utils.APIRestService;
 import com.github.ue_museumfilter.utils.RetrofitClient;
 import com.github.ue_museumfilter.utils.data.Museum;
 import com.github.ue_museumfilter.utils.data.MuseumRes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,11 +28,17 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
     Button btn_open_dialog;
     Button btn_aplicar_filtro;
     String distrito;
+    MuseumListFragment museumListFragment;
+    Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        museumListFragment = new MuseumListFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, museumListFragment).commit();
+        currentFragment = museumListFragment;
 
         btn_open_dialog = findViewById(R.id.btn_buscar);
         btn_aplicar_filtro = findViewById(R.id.btn_aplicar_filtro);
@@ -51,10 +59,13 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
                     if (response.isSuccessful()) {
                         MuseumRes museumRes = response.body();
                         List<Museum> museums = museumRes.getMuseums();
-                        MuseumAdapter adapter = new MuseumAdapter(museums);
-                        RecyclerView recyclerView = findViewById(R.id.rv_museos);
-                        recyclerView.setAdapter(adapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                        if (museums == null) {
+                            museums = new ArrayList<>();
+                        }
+
+                        if (currentFragment == museumListFragment) {
+                            museumListFragment.setMuseumList(museums);
+                        }
                     }
                 }
 
@@ -63,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
                     Toast.makeText(MainActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
-        });
+            });
         });
     }
 
@@ -83,6 +94,10 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_list:
+                if (currentFragment != museumListFragment) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, museumListFragment).commit();
+                    currentFragment = museumListFragment;
+                }
                 Toast.makeText(this, "Mostrando lista", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_map:
@@ -92,6 +107,5 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 }

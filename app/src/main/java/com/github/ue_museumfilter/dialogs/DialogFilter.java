@@ -1,4 +1,4 @@
-package com.github.ue_museumfilter;
+package com.github.ue_museumfilter.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,6 +11,8 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import com.github.ue_museumfilter.R;
 
 public class DialogFilter extends DialogFragment {
     private Spinner filter_spinner;

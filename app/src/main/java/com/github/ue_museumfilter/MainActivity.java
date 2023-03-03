@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.github.ue_museumfilter.dialogs.DialogFilter;
+import com.github.ue_museumfilter.fragments.MapsFragment;
 import com.github.ue_museumfilter.fragments.MuseumListFragment;
 import com.github.ue_museumfilter.utils.APIRestService;
 import com.github.ue_museumfilter.utils.RetrofitClient;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
     Button btn_aplicar_filtro;
     String distrito;
     MuseumListFragment museumListFragment;
+    MapsFragment mapFragment;
     Fragment currentFragment;
 
     @Override
@@ -65,7 +67,10 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
 
                         if (currentFragment == museumListFragment) {
                             museumListFragment.setMuseumList(museums);
+                        } else if (currentFragment == mapFragment) {
+                            mapFragment.setMuseumList(museums, distrito);
                         }
+
                     }
                 }
 
@@ -101,11 +106,21 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
                 Toast.makeText(this, "Mostrando lista", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_map:
+                if (mapFragment == null) {
+                    mapFragment = new MapsFragment();
+                }
+
+                if (currentFragment.getId() != mapFragment.getId()) {
+
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mapFragment).commit();
+                    currentFragment = mapFragment;
+                }
+
                 Toast.makeText(this, "Mostrando mapa", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
 
+    }
 }

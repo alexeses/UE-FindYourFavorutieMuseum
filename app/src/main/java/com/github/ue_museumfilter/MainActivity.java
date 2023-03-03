@@ -17,7 +17,6 @@ import com.github.ue_museumfilter.utils.RetrofitClient;
 import com.github.ue_museumfilter.utils.data.Museum;
 import com.github.ue_museumfilter.utils.data.MuseumRes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -67,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
                         }
 
                         List<Museum> museums = museumRes.getMuseums();
-                        //museums = new ArrayList<>();
 
                         if (currentFragment == museumListFragment) {
                             museumListFragment.setMuseumList(museums);
@@ -117,8 +115,8 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
                     mapFragment = new MapsFragment();
                 }
 
-                if (currentFragment.getId() != mapFragment.getId()) {
 
+                if (currentFragment != mapFragment) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mapFragment).commit();
                     currentFragment = mapFragment;
                 }

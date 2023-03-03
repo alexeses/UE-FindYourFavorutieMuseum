@@ -26,6 +26,7 @@ public class MapsFragment extends Fragment {
     private GoogleMap googleMap;
     private List<Museum> museums;
     private TextView tv_title;
+    private View mapView;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -34,18 +35,20 @@ public class MapsFragment extends Fragment {
             MapsFragment.this.googleMap = googleMap;
 
             tv_title = getActivity().findViewById(R.id.tv_title);
+            mapView = getView().findViewById(R.id.map);
 
             LatLng madrid = new LatLng(40.416775, -3.703790);
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(madrid, 10));
             googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-
-            if (museums != null) {
+            if (museums != null && !museums.isEmpty()) {
                 for (Museum museum : museums) {
                     System.out.println(museum.getTitle());
                     LatLng location = new LatLng(museum.getLocation().getLatitude(), museum.getLocation().getLongitude());
                     googleMap.addMarker(new MarkerOptions().position(location).title(museum.getTitle()));
                 }
+            } else {
+                mapView.setVisibility(View.GONE);
             }
 
         }
@@ -54,20 +57,22 @@ public class MapsFragment extends Fragment {
     public void setMuseumList(List<Museum> museums, String distrito) {
         this.museums = museums;
 
-        // Si el distrito es null, es que se ha pulsado en el botón de "Todos los distritos"
         if (distrito == null) {
-            tv_title.setText("Todos los distritos");
+            tv_title.setText(R.string.sin_filtro);
         } else {
-            tv_title.setText(distrito);
+            tv_title.setText(getString(R.string.distrito_select) + distrito);
         }
 
         if (googleMap != null) {
             googleMap.clear();
-            if (museums != null) {
+            if (museums != null && !museums.isEmpty()) {
                 for (Museum museum : museums) {
                     LatLng location = new LatLng(museum.getLocation().getLatitude(), museum.getLocation().getLongitude());
                     googleMap.addMarker(new MarkerOptions().position(location).title(museum.getTitle()));
                 }
+                mapView.setVisibility(View.VISIBLE);
+            } else {
+                mapView.setVisibility(View.GONE);
             }
         }
     }

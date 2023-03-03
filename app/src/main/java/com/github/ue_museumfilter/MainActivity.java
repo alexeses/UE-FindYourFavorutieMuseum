@@ -60,10 +60,14 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
                 public void onResponse(Call<MuseumRes> call, Response<MuseumRes> response) {
                     if (response.isSuccessful()) {
                         MuseumRes museumRes = response.body();
-                        List<Museum> museums = museumRes.getMuseums();
-                        if (museums == null) {
-                            museums = new ArrayList<>();
+
+                        if (museumRes == null) {
+                            Toast.makeText(MainActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
+                            return;
                         }
+
+                        List<Museum> museums = museumRes.getMuseums();
+                        //museums = new ArrayList<>();
 
                         if (currentFragment == museumListFragment) {
                             museumListFragment.setMuseumList(museums);
@@ -100,12 +104,15 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
         switch (item.getItemId()) {
             case R.id.action_list:
                 if (currentFragment != museumListFragment) {
+                    distrito = null;
+
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, museumListFragment).commit();
                     currentFragment = museumListFragment;
                 }
                 Toast.makeText(this, "Mostrando lista", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_map:
+                distrito = null;
                 if (mapFragment == null) {
                     mapFragment = new MapsFragment();
                 }
@@ -121,6 +128,5 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 }

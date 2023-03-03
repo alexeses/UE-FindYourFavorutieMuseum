@@ -54,7 +54,12 @@ public class MapsFragment extends Fragment {
     public void setMuseumList(List<Museum> museums, String distrito) {
         this.museums = museums;
 
-        tv_title.setText("Distrito " + distrito);
+        // Si el distrito es null, es que se ha pulsado en el botón de "Todos los distritos"
+        if (distrito == null) {
+            tv_title.setText("Todos los distritos");
+        } else {
+            tv_title.setText(distrito);
+        }
 
         if (googleMap != null) {
             googleMap.clear();

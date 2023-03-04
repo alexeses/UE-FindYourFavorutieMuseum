@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private TextView tvMuseumName;
     private TextView tvMuseumDistrict;
     private TextView tvMuseumArea;
     private TextView tvMuseumAddress;
@@ -20,7 +19,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        tvMuseumName = findViewById(R.id.tv_museum_name);
+        TextView tvMuseumName = findViewById(R.id.tv_museum_name);
         tvMuseumDistrict = findViewById(R.id.tv_museum_district);
         tvMuseumArea = findViewById(R.id.tv_museum_area);
         tvMuseumAddress = findViewById(R.id.tv_museum_address);

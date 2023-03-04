@@ -42,6 +42,9 @@ public class MuseumAdapter extends RecyclerView.Adapter<MuseumAdapter.MuseumView
                 String[] partsDis = districtId.split("/");
 
                 // TOOD: Check if area is null or not
+                if (museum.getAddress().getArea() == null) {
+                    intent.putExtra("museum_area", "null");
+                }
 
                 System.out.println(museum.getAddress().getArea().getId());
                 String areaId= museum.getAddress().getArea().getId();

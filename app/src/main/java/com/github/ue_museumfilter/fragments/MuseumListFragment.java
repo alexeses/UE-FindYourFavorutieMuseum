@@ -37,7 +37,4 @@ public class MuseumListFragment extends Fragment {
         MuseumAdapter adapter = new MuseumAdapter(museums);
         recyclerView.setAdapter(adapter);
     }
-
-
-
 }

@@ -50,7 +50,6 @@ public class MapsFragment extends Fragment {
             } else {
                 mapView.setVisibility(View.GONE);
             }
-
         }
     };
 

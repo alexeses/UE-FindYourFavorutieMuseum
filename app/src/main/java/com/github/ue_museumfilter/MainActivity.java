@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
                     if (response.isSuccessful()) {
                         MuseumRes museumRes = response.body();
 
-                        if (museumRes == null) {
-                            Toast.makeText(MainActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
+                        if (museumRes.getMuseums().isEmpty()) {
+                            Toast.makeText(MainActivity.this, "No hay museos en este distrito", Toast.LENGTH_SHORT).show();
                             return;
                         }
 

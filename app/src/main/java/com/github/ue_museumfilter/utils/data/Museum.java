@@ -96,4 +96,6 @@ public class Museum implements Serializable {
         this.organization = organization;
     }
 
+
+
 }

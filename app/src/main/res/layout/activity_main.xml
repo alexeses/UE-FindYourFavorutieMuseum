@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         app:backgroundTint="#C6B496"
         android:background="@drawable/btn_round"
-        android:text="Aplicar filtro"
+        android:text="@string/btn_consult_list"
         android:layout_margin="16dp"
         android:textColor="#FFFFFF"
         android:textSize="18sp"

@@ -44,7 +44,10 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
         btn_open_dialog = findViewById(R.id.btn_buscar);
         btn_aplicar_filtro = findViewById(R.id.btn_aplicar_filtro);
 
+
         btn_open_dialog.setOnClickListener(v -> {
+            cleanFilter();
+
             DialogFilter dialogFilter = new DialogFilter();
             dialogFilter.show(getSupportFragmentManager(), "dialogFilter");
         });
@@ -85,6 +88,26 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
         });
     }
 
+    private void cleanFilter() {
+        distrito = null;
+
+        if (currentFragment != null) {
+            getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+        }
+
+        if (currentFragment == museumListFragment) {
+            museumListFragment = new MuseumListFragment();
+            btn_aplicar_filtro.setText(R.string.btn_consult_list);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, museumListFragment).commit();
+            currentFragment = museumListFragment;
+        } else {
+            mapFragment = new MapsFragment();
+            btn_aplicar_filtro.setText(R.string.btn_consult_map);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mapFragment).commit();
+            currentFragment = mapFragment;
+        }
+    }
+
     @Override
     public void onFilterSelected(String distrito) {
         this.distrito = distrito;
@@ -101,26 +124,15 @@ public class MainActivity extends AppCompatActivity implements DialogFilter.OnFi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_list:
-                if (currentFragment != museumListFragment) {
-                    distrito = null;
+                currentFragment = museumListFragment;
 
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, museumListFragment).commit();
-                    currentFragment = museumListFragment;
-                }
+                cleanFilter();
                 Toast.makeText(this, "Mostrando lista", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.action_map:
-                distrito = null;
-                if (mapFragment == null) {
-                    mapFragment = new MapsFragment();
-                }
+                currentFragment = mapFragment;
 
-
-                if (currentFragment != mapFragment) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mapFragment).commit();
-                    currentFragment = mapFragment;
-                }
-
+                cleanFilter();
                 Toast.makeText(this, "Mostrando mapa", Toast.LENGTH_SHORT).show();
                 return true;
             default:

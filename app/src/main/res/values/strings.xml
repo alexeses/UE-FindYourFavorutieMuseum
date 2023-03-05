@@ -5,4 +5,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sin_filtro">Sin filtro</string>
     <string name="distrito_select">Distrito seleccionado: "</string>
+    <string name="btn_consult_list">Consultar lista</string>
+    <string name="btn_consult_map">Consultar mapa</string>
 </resources>

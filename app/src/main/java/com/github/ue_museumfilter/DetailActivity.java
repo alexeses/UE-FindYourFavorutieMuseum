@@ -32,13 +32,15 @@ public class DetailActivity extends AppCompatActivity {
             String district = intent.getStringExtra("museum_district");
             String area = intent.getStringExtra("museum_area");
             String address = intent.getStringExtra("museum_address");
+            String postalCode = intent.getStringExtra("museum_postal_code");
+            String locality = intent.getStringExtra("museum_locality");
             String description = intent.getStringExtra("museum_description");
             String schedule = intent.getStringExtra("museum_schedule");
 
             tvMuseumName.setText(name);
             tvMuseumDistrict.setText(district);
             tvMuseumArea.setText(area);
-            tvMuseumAddress.setText(address);
+            tvMuseumAddress.setText(address + ", " + postalCode + " " + locality);
             tvMuseumDescription.setText(description);
             tvMuseumSchedule.setText(schedule);
         }

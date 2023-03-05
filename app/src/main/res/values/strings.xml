@@ -7,4 +7,6 @@
     <string name="distrito_select">Distrito seleccionado: "</string>
     <string name="btn_consult_list">Consultar lista</string>
     <string name="btn_consult_map">Consultar mapa</string>
+    <string name="btn_go_search">Comienza a buscar</string>
+    <string name="tv_general_title">Bienvenido al buscador de Museos de la Comunidad de Madrid</string>
 </resources>

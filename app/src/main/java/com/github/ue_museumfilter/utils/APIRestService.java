@@ -1,9 +1,11 @@
 package com.github.ue_museumfilter.utils;
 
+import com.github.ue_museumfilter.utils.data.Museum;
 import com.github.ue_museumfilter.utils.data.MuseumRes;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIRestService {
@@ -12,5 +14,10 @@ public interface APIRestService {
     @GET("201132-0-museos.json")
     Call<MuseumRes> getMuseums(
             @Query("distrito_nombre") String district
+    );
+
+    @GET("tipo/entidadesyorganismos/{id}")
+    Call<MuseumRes> getMuseumID(
+            @Path("id") String id
     );
 }
